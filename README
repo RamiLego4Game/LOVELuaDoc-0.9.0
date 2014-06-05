@@ -1,4 +1,4 @@
-This repository provides the API documentation of LÖVE v0.8.0 [1] for Koneki Lua Development Tools (LDT) [2].
+This repository provides the API documentation of LÖVE v0.9.0 [1] for Koneki Lua Development Tools (LDT) [2].
 Zip the files and add it as library to your LDT project.
 
 [1] https://love2d.org/
