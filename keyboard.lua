@@ -5,12 +5,6 @@
 --
 
 ---
--- Returns the delay and interval of key repeating.
--- @function [parent = #keyboard] getKeyRepeat
--- @return #number delay The amount of time before repeating the key (in seconds)
--- @return #number interval The amount of time between repeats (in seconds)
-
----
 -- Checks whether a certain key is down. Not to be confused with love.keypressed or
 -- love.keyreleased.
 -- @function [parent = #keyboard] isDown
@@ -31,6 +25,16 @@
 -- @function [parent = #keyboard] setKeyRepeat
 -- @param #number delay The amount of time before repeating the key (in seconds). 0 disables key repeat.
 -- @param #number interval The amount of time between repeats (in seconds)
+
+---
+-- Enables or disables text input events. It is enabled by default.
+-- @function [parent = #keyboard] setTextInput
+-- @param #boolean enable Whether text input events should be enabled.
+
+---
+-- Gets whether text input events are enabled.
+-- @function [parent = #keyboard] hasTextInput
+-- @return #boolean Whether text input events are enabled.
 
 
 return nil

@@ -24,7 +24,7 @@
 
 ---
 -- Returns all the files and subdirectories in the directory.
--- @function [parent = #filesystem] enumerate
+-- @function [parent = #filesystem] getDirectoryItems
 -- @param #string dir The directory.
 -- @param #table files A sequence with the names of all files and subdirectories as strings.
 
@@ -91,7 +91,7 @@
 
 ---
 -- Creates a directory.
--- @function [parent = #filesystem] mkdir
+-- @function [parent = #filesystem] createDirectory
 -- @param #string name The directory to create.
 -- @return #boolean ok True if the directory was created, false if not.
 
@@ -128,6 +128,7 @@
 -- Note that you can only set the name of the folder to store yourfiles in, not the location.
 -- @function [parent = #filesystem] setIdentity
 -- @param #string name The new identity that will be used as write directory
+-- @param #boolean appendToPath-(false) Whether the identity directory will be searched when reading a filepath before or after the game's source directory and any archives currently mounted with love.filesystem.mount.
 
 ---
 -- Sets the source of the game, where the code is present, can only be called once, done automatically.
@@ -137,9 +138,49 @@
 -- Write data to a file
 -- @function [parent = #filesystem] write
 -- @param #string name The name (and path) of the file.
--- @param #string data The data that should be written to the file
+-- @param #string data The data that should be written to the file.
 -- @param #number size-(all) How many bytes to read.
 -- @return #boolean success If the operation was successful.
+
+---
+-- Gets whether the game is in fused mode or not
+-- @function [parent = #filesystem] isFused
+-- @return #boolean True if the game is in fused mode, false otherwise.
+
+---
+-- Gets the write directory name for your game
+-- @function [parent = #filesystem] getIdentity
+-- @return #string The identity that is used as write directory.
+
+---
+-- Append data to an existing file
+-- @function [parent = #filesystem] append
+-- @param #string name The name (and path) of the file.
+-- @param #string data The string data to append to the file.
+-- @param #number size-(all) How many bytes to write.
+-- @return #boolean True if the operation was successful, or nil if there was an error.
+-- @return #string The error message on failure.
+
+---
+-- Gets the size in bytes of a file
+-- @function [parent = #filesystem] getSize
+-- @param #string filename The path and name to a file.
+-- @return #number The size in bytes of the file, or nil on failure.
+-- @return #string The error message on failure.
+
+---
+-- Mounts a zip file or folder in the game's save directory for reading
+-- @function [parent = #filesystem] mount
+-- @param #string archive The folder or zip file in the game's save directory to mount.
+-- @param #string mountpoint The new path the archive will be mounted to.
+-- @param #boolean appendToPath-(false) Whether the archive will be searched when reading a filepath before or after already-mounted archives. This includes the game's source and save directories.
+-- @return True if the archive was successfully mounted, false otherwise.
+
+---
+-- Unmounts a zip file or folder previously mounted for reading with love.filesystem.mount.
+-- @function [parent = #filesystem] unmount
+-- @param #string archive The folder or zip file in the game's save directory which is currently mounted.
+-- @return #boolean True if the archive was successfully unmounted, false otherwise.
 
 
 return nil

@@ -28,14 +28,6 @@
 -- @param #number segments (Optional = 10) The number of segments used for drawing the arc.
 
 ---
--- Checks if a display mode is supported.
--- @function [parent = #graphics] checkMode
--- @param #number width The display width.
--- @param #number height The display height.
--- @param #boolean fullscreen True to check for fullscreen, false for windowed.
--- @return #boolean supported True if supported, false if not.
-
----
 -- Draws a circle.
 -- @function [parent = #graphics] circle
 -- @param mode How to draw the circle.
@@ -66,21 +58,6 @@
 -- @param #number sy (Optional = sx) Scale factor (y-axis). Can be negative.
 -- @param #number ox (Optional = 0) Origin offset (x-axis). (A value of 20 would effectively move your drawable object 20 pixels to the left.)
 -- @param #number oy (Optional = 0) Origin offset (y-axis). (A value of 20 would effectively move your drawable object 20 pixels up.)
--- @param #number kx (Optional = 0) Shearing factor (x-axis).
--- @param #number ky (Optional = 0) Shearing factor (y-axis).
-
----
--- Draw a Quad with the specified Image on screen.
--- @function [parent = #graphics] drawq
--- @param image An image to texture the quad with.
--- @param quad The quad to draw on screen.
--- @param #number x The position to draw the object (x-axis).
--- @param #number y The position to draw the object (y-axis).
--- @param #number r (Optional = 0) Orientation (radians).
--- @param #number sx (Optional = 1) Scale factor (x-axis).
--- @param #number sy (Optional = sx) Scale factor (y-axis).
--- @param #number ox (Optional = 0) Origin offset (x-axis).
--- @param #number oy (Optional = 0) Origin offset (y-axis).
 -- @param #number kx (Optional = 0) Shearing factor (x-axis).
 -- @param #number ky (Optional = 0) Shearing factor (y-axis).
 
@@ -316,12 +293,6 @@
 -- @return spriteBatch The new SpriteBatch.
 
 ---
--- Creates a new stencil.
--- @function [parent = #graphics] newStencil
--- @param stencilFunction Function that draws the stencil.
--- @return myStencil Function that defines the new stencil.
-
----
 -- Draws a point.
 -- @function [parent = #graphics] point
 -- @param #number x The position on the x-axis.
@@ -397,6 +368,13 @@
 -- @param #number y The position on the y-axis.
 -- @param #number limit Wrap the line after this many horizontal pixels.
 -- @param align (Optional = "left") The alignment
+-- @param #number r-(0) Orientation (radians).
+-- @param #number sx-(1) Scale factor (x-axis).
+-- @param #number sy-(sx) Scale factor (y-axis).
+-- @param #number ox-(0) Origin offset (x-axis).
+-- @param #number oy-(0) Origin offset (y-axis).
+-- @param #number kx-(0) Shearing factor (x-axis).
+-- @param #number ky-(0) Shearing factor (y-axis).
 
 ---
 -- Copies and pushes the current coordinate transformation to the transformation stack.
@@ -406,19 +384,6 @@
 -- active. Later changes to the transformation can be undone by using the pop operation, which
 -- returns the coordinate transform to the state it was in before calling push.
 -- @function [parent = #graphics] push
-
----
--- Draws a quadrilateral shape.
--- @function [parent = #graphics] quad
--- @param mode How to draw the quad.
--- @param #number x1 The position of the top left corner along x-axis.
--- @param #number y1 The position of the top left corner along y-axis.
--- @param #number x2 The position of the top right corner along x-axis.
--- @param #number y2 The position of the top right corner along y-axis.
--- @param #number x3 The position of the bottom right corner along x-axis.
--- @param #number y3 The position of the bottom right corner along y-axis.
--- @param #number x4 The position of the bottom left corner along x-axis.
--- @param #number y4 The position of the bottom left corner along y-axis.
 
 ---
 -- Draws a rectangle.
@@ -507,7 +472,7 @@
 
 ---
 -- Sets the window caption.
--- @function [parent = #graphics] setCaption
+-- @function [parent = #graphics] setTitle
 -- @param #string caption The new window caption.
 
 ---
@@ -530,7 +495,7 @@
 
 ---
 -- Sets the default scaling filters.
--- @function [parent = #graphics] setDefaultImageFilter
+-- @function [parent = #graphics] setDefaultFilter
 -- @param min Filter mode used when scaling the image down.
 -- @param mag Filter mode used when scaling the image up.
 
@@ -559,12 +524,6 @@
 --
 -- It's the same as love.graphics.setStencil with the mask inverted.
 -- @function [parent = #graphics] setInvertedStencil
-
----
--- Sets the line width and style.
--- @function [parent = #graphics] setLine
--- @param #number width The width of the line.
--- @param style (Optional = "smooth") The LineStyle to use.
 
 ---
 -- Sets the line style.
@@ -615,12 +574,6 @@
 ---
 -- Disables pixel effects, allowing unfiltered drawing operations.
 -- @function [parent = #graphics] setPixelEffect
-
----
--- Sets the point size and style.
--- @function [parent = #graphics] setPoint
--- @param #number size The new point size.
--- @param style The new point style.
 
 ---
 -- Sets the point size.
@@ -695,15 +648,35 @@
 -- @param #number dy The translation relative to the y-axis.
 
 ---
--- Draws a triangle.
--- @function [parent = #graphics] triangle
--- @param mode How to draw the triangle.
--- @param #number x1 The position of first point on the x-axis.
--- @param #number y1 The position of first point on the y-axis.
--- @param #number x2 The position of second point on the x-axis.
--- @param #number y2 The position of second point on the y-axis.
--- @param #number x3 The position of third point on the x-axis.
--- @param #number y3 The position of third point on the y-axis.
+-- Sets the color mask
+-- @function [parent = #graphics] setColorMask
+-- @param #boolean red Render red component.
+-- @param #boolean green Render green component.
+-- @param #boolean blue Render blue component.
+-- @param #boolean alpha Render alpha component.
+
+---
+-- This function is always used to reverse any previous calls to love.graphics.rotate, love.graphics.scale, love.graphics.shear or love.graphics.translate
+-- @function [parent = #graphics] origin
+
+---
+-- Gets information about the system's video card and drivers
+-- @function [parent = #graphics] getRendererInfo
+-- @return #string The name of the renderer, e.g. "OpenGL".
+-- @return #string The version of the renderer with some extra driver-dependent version info, e.g. "2.1 INTEL-8.10.44".
+-- @return #string The name of the graphics card vendor, e.g. "Intel Inc.".
+-- @return #string The name of the graphics card, e.g. "Intel HD Graphics 3000 OpenGL Engine".
+
+---
+-- Gets the max supported width or height of Images and Canvases
+-- @function [parent = #graphics] getMaxImageSize
+-- @return #number The max supported width or height of Images and Canvases.
+
+---
+-- Create a new CompressedData object from a compressed image file
+-- @function [parent = #graphics] newCompressedData
+-- @param #string filename The filename of the compressed image file.
+-- @return CompressedData The new CompressedData object.
 
 
 return nil

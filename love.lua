@@ -59,6 +59,16 @@
 -- 
 
 ---
+-- Provides access to information about the user's system.
+-- @field [parent = #love] system#system system
+-- 
+
+---
+-- Provides an interface for modifying and retrieving information about the program's window.
+-- @field [parent = #love] window#window window
+--
+
+---
 -- Can simulate 2D rigid body physics in a realistic manner.
 -- @field [parent = #love] physics#physics physics
 -- 
@@ -103,7 +113,7 @@
 -- Callback function triggered when a key is pressed.
 -- @function [parent = #love] keypressed
 -- @param key Character of the key pressed.
--- @param #number unicode The unicode number of the key pressed.
+-- @param #boolean isrepeat Whether this keypress event is a repeat.
 
 ---
 -- Callback function triggered when a key is released.
@@ -143,6 +153,11 @@
 -- Callback function used to update the state of the game every frame.
 -- @function [parent = #love] update
 -- @param #number dt Time since the last update in seconds.
+
+---
+-- Callback function triggered when window receives or loses mouse focus
+-- @function [parent = #love] mousefocus
+-- @param #boolean f Window mouse focus.
 
 
 return nil

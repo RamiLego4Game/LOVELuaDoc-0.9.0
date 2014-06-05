@@ -18,11 +18,6 @@
 -- @return #number fps The current FPS.
 
 ---
--- Returns the value of a timer with an unspecified starting time. The time is accurate to the microsecond.
--- @function [parent = #timer] getMicroTime
--- @return #number t The time passed in seconds. 
-
----
 -- Returns the value of a timer with an unspecified starting time. This function should only be used to calculate differences between points in time, as the starting time of the timer is unknown.
 -- @function [parent = #timer] getTime
 -- @return #number time The time in seconds.

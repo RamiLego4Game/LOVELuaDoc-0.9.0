@@ -46,7 +46,7 @@
 
 ---
 -- Grabs the mouse and confines it to the window.
--- @function [parent = #mouse] setGrab
+-- @function [parent = #mouse] setGrabbed
 -- @param #boolean grab True to confine the mouse, false to let it leave the window.
 
 ---
@@ -59,6 +59,24 @@
 -- Sets the current visibility of the cursor.
 -- @function [parent = #mouse] setVisible
 -- @param #boolean visible True to set the cursor to visible, false to hide the cursor.
+
+---
+-- Creates a new hardware Cursor object from an image file or ImageData.
+-- @function [parent = #mouse] newCursor
+-- @param imageData The ImageData to use for the new Cursor.
+-- @param #number hotx-(0) The x-coordinate in the ImageData of the cursor's hot spot.
+-- @param #number hoty-(0) The y-coordinate in the ImageData of the cursor's hot spot.
+-- @return Cursor The new Cursor object.
+
+---
+-- Sets the current X position of the mouse
+-- @function [parent = #mouse] setX
+-- @param #number x The new position of the mouse along the x-axis.
+
+---
+-- Sets the current Y position of the mouse
+-- @function [parent = #mouse] setY
+-- @param #number y The new position of the mouse along the y-axis.
 
 
 return nil
